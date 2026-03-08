@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Inventory System</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">PI</div>
+        <div>
+          <h2>Inventory Pro</h2>
+          <p>Stock Monitoring Dashboard</p>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <h3>Project Overview</h3>
+        <p>
+          Manage products, track stock levels, identify low-stock items,
+          and monitor inventory with a professional dashboard.
+        </p>
+      </div>
+
+      <div class="side-card">
+        <h3>Key Features</h3>
+        <ul>
+          <li>Add new products</li>
+          <li>View all products</li>
+          <li>Update quantities</li>
+          <li>Detect low stock items</li>
+          <li>Search and filter inventory</li>
+          <li>Visual stock analytics</li>
+        </ul>
+      </div>
+
+      <div class="side-card">
+        <h3>Status</h3>
+        <span class="status-pill active">System Active</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Product Inventory Dashboard</h1>
+          <p>Professional inventory tracking with live insights</p>
+        </div>
+      </header>
+
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span>Total Products</span>
+          <h2 id="totalProducts">0</h2>
+        </div>
+        <div class="stat-card">
+          <span>Total Quantity</span>
+          <h2 id="totalQuantity">0</h2>
+        </div>
+        <div class="stat-card warning">
+          <span>Low Stock Items</span>
+          <h2 id="lowStockCount">0</h2>
+        </div>
+        <div class="stat-card success">
+          <span>Total Inventory Value</span>
+          <h2 id="totalValue">₹0</h2>
+        </div>
+      </section>
+
+      <section class="top-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3>Add New Product</h3>
+          </div>
+
+          <form id="productForm" class="product-form">
+            <div class="form-group">
+              <label for="name">Product Name</label>
+              <input type="text" id="name" placeholder="Enter product name" />
+            </div>
+
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" id="price" placeholder="Enter product price" />
+            </div>
+
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" placeholder="Enter quantity" />
+            </div>
+
+            <button type="submit" class="btn-primary">Add Product</button>
+          </form>
+
+          <p id="formMessage" class="form-message"></p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Low Stock Alerts</h3>
+          </div>
+
+          <div id="lowStockList" class="alert-list">
+            <p class="empty-state">No low-stock products right now.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header row-between">
+          <h3>Inventory Overview</h3>
+          <div class="controls">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search by product name"
+              class="search-input"
+            />
+
+            <select id="filterSelect" class="filter-select">
+              <option value="all">All Products</option>
+              <option value="inStock">In Stock</option>
+              <option value="lowStock">Low Stock</option>
+            </select>
+
+            <select id="sortSelect" class="filter-select">
+  <option value="default">Sort By</option>
+  <option value="priceLowHigh">Price: Low to High</option>
+  <option value="priceHighLow">Price: High to Low</option>
+</select>
+
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody">
+              <tr>
+                <td colspan="5" class="empty-state">No products available.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="chart-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3>Stock Quantity Chart</h3>
+          </div>
+          <canvas id="inventoryChart"></canvas>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="updateModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Update Product Quantity</h3>
+        <button id="closeModal" class="close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>Product:</strong> <span id="modalProductName"></span></p>
+        <p><strong>Current Quantity:</strong> <span id="modalCurrentQty"></span></p>
+
+        <div class="form-group">
+          <label for="newQuantity">New Quantity</label>
+          <input type="number" id="newQuantity" min="0" placeholder="Enter new quantity" />
+        </div>
+
+        <button id="saveQuantityBtn" class="btn-primary full-width">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
