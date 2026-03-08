@@ -1,4 +1,4 @@
-const API_URL = "/products";
+const API_URL = "http://localhost:5000/products";
 const LOW_STOCK_LIMIT = 10;
 
 const productForm = document.getElementById("productForm");
