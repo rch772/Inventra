@@ -1,3 +1,6 @@
+URL: http://127.0.0.1:5500/product-inventory-system/public/
+
+
 Product Inventory System
 Project Overview
 
@@ -107,10 +110,5 @@ Author
 
 Name: Roshan Chiluka
 
-Email: roshan.chiluka@example.com
+Email:roshanchiluka25@gmail.com
 
-LinkedIn/GitHub: [Add your links]
-
-License
-
-This project is licensed under the MIT License.
